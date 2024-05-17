@@ -44,3 +44,7 @@ func (c Controller) Show(ctx *gin.Context) {
 	)
 	return
 }
+
+func (c Controller) Create(ctx *gin.Context) {
+
+}
