@@ -1,0 +1,13 @@
+app:
+  name: "Blog"
+
+server:
+  host: "localhost"
+  port: "8081"
+
+db:
+  username: "root"
+  password: "root"
+  port: "3306"
+  hot: "127.0.0.1"
+  name: "blog"

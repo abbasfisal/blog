@@ -1,0 +1,16 @@
+{{define "templates/errors/html/404"}}
+
+    {{template "templates/layouts/html/head" .}}
+    {{template "templates/layouts/html/navbar" .}}
+    {{template "templates/layouts/html/header" .}}
+
+        <div class="col-12">
+            <h1>{{.title}}</h1>
+            <p>{{.error}}</p>
+        </div>
+
+    {{template "templates/layouts/html/footer" .}}
+    {{template "templates/layouts/html/foot" .}}
+
+
+{{end}}
