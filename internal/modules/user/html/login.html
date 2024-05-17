@@ -1,0 +1,40 @@
+{{define "modules/user/html/login"}}
+
+    {{template "templates/layouts/html/head" .}}
+    {{template "templates/layouts/html/navbar" .}}
+    {{template "templates/layouts/html/header" .}}
+
+
+    <!-- Begin Form
+================================================== -->
+    <div class="col-md-12 col-md-offset-2 col-xs-12">
+        <div class="auth">
+            <div class="auth-triangle"></div>
+
+            <h2 class="auth-header">Login</h2>
+
+            <form class="auth-container" method="POST" action="/login">
+                <p>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Email" value="{{range .Olds.email}}{{.}}{{end}}">
+                    <span class="text-danger">{{.Errors.email}}</span>
+                </p>
+                <p>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Password">
+                    <span class="text-danger">{{.Errors.password}}</span>
+                </p>
+                <p>
+                    <button type="submit">login</button>
+                </p>
+            </form>
+            <p class="text-center">Or <a href="/register">Register</a></p>
+        </div>
+    </div>
+    <!-- End Form
+
+    {{template "templates/layouts/html/footer" .}}
+    {{template "templates/layouts/html/foot" .}}
+
+
+{{end}}

@@ -17,27 +17,30 @@
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <!-- Begin Menu -->
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Login</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                            <img class="float-left profile-thumbnail"
-                                 src="https://ui-avatars.com/api/?name=Ayman%20Elmalah" alt="Ayman Elmalah">
-                            Ayman Elmalah
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a class="nav-link" href="#">Create article</a>
-                            </li>
-                            <li>
-                                <a href="#" onclick="$('#logout').submit()" class="nav-link">
-                                    Logout
-                                    <form action="#" method="POST" id="logout"></form>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                    {{if (eq .Auth.ID 0)}}
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/login">Login</a>
+                        </li>
+                    {{else}}
+                        <li class="nav-item dropdown">
+                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                <img class="float-left profile-thumbnail"
+                                     src="https://ui-avatars.com/api/?name=Ayman%20Elmalah" alt="Ayman Elmalah">
+                                {{.Auth.Name}}
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="nav-link" href="#">Create article</a>
+                                </li>
+                                <li>
+                                    <a href="#" onclick="$('#logout').submit()" class="nav-link">
+                                        Logout
+                                        <form action="/logout" method="POST" id="logout"></form>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    {{end}}
                 </ul>
                 <!-- End Menu -->
                 <!-- Begin Search -->

@@ -39,3 +39,27 @@ func (u UserService) Create(request auth.RegisterRequest) (UserResponse.User, er
 
 	return UserResponse.ToUser(newUser), nil
 }
+
+func (u UserService) CheckUserExists(email string) bool {
+	user := u.userRepo.FindByEmail(email)
+	if user.ID > 0 {
+		return true
+	}
+	return false
+}
+
+func (u UserService) HandleUserLogin(req auth.LoginRequest) (UserResponse.User, error) {
+	var userResponse UserResponse.User
+
+	existsUser := u.userRepo.FindByEmail(req.Email)
+	if existsUser.ID == 0 {
+		return userResponse, errors.New("invalid Credentials")
+	}
+
+	err := bcrypt.CompareHashAndPassword([]byte(existsUser.Password), []byte(req.Password))
+	if err != nil {
+		return userResponse, errors.New("invalid Credentials")
+	}
+
+	return UserResponse.ToUser(existsUser), nil
+}
