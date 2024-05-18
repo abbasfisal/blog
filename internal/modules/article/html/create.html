@@ -1,0 +1,41 @@
+{{define "modules/article/html/create"}}
+
+    {{template "templates/layouts/html/head" .}}
+    {{template "templates/layouts/html/navbar" .}}
+    {{template "templates/layouts/html/header" .}}
+
+
+    <!-- Begin Form
+    ================================================== -->
+    <div class="col-md-12 col-xs-12">
+        <form class="article-form-container" action="/articles/create" method="POST">
+            <div class="form-group">
+                <label class="h4 form-control-label" for="title">Title</label>
+                <input type="text" class="form-control" name="title" id="title" placeholder="Title" required=""
+                       value="{{range .Olds.title}}{{.}}{{end}}">
+                <span class="text-danger">
+                    {{.Errors.title}}
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label class="h4 form-control-label" for="content">Content</label>
+                <textarea class="form-control" name="content" id="content" placeholder="Content"
+                          rows="10">{{range .Olds.content}}{{.}}{{end}}</textarea>
+                <span class="text-danger">
+                    {{.Errors.content}}
+                </span>
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+    <!-- End Form
+
+    {{template "templates/layouts/html/footer" .}}
+    {{template "templates/layouts/html/foot" .}}
+
+
+{{end}}

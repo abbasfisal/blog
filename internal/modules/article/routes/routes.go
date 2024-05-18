@@ -16,5 +16,6 @@ func Routes(r *gin.Engine) {
 	authGrp.Use(middlewares.IsAuth())
 	{
 		authGrp.GET("/create", ArticleController.Create)
+		authGrp.POST("/create", ArticleController.Store)
 	}
 }

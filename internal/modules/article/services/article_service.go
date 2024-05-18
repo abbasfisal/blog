@@ -2,7 +2,9 @@ package services
 
 import (
 	"errors"
+	ArticleModel "github.com/abbasfisal/blog/internal/modules/article/models"
 	ArticleRepository "github.com/abbasfisal/blog/internal/modules/article/repositories"
+	"github.com/abbasfisal/blog/internal/modules/article/requests"
 	ArticleResponse "github.com/abbasfisal/blog/internal/modules/article/responses"
 	"github.com/abbasfisal/blog/internal/modules/user/reqeuests/auth"
 	UserResponse "github.com/abbasfisal/blog/internal/modules/user/responses"
@@ -40,4 +42,18 @@ func (a ArticleService) Find(id int) (ArticleResponse.Article, error) {
 		return response, errors.New("article not found")
 	}
 	return ArticleResponse.ToArticle(article), nil
+}
+func (a ArticleService) StoreAsUser(req requests.StoreRequest, user UserResponse.User) (ArticleResponse.Article, error) {
+	var response ArticleResponse.Article
+	var article = ArticleModel.Article{
+		Title:   req.Title,
+		Content: req.Content,
+		UserID:  user.ID,
+	}
+	newArticle := a.articleRepo.Create(article)
+	if newArticle.ID == 0 {
+		return response, errors.New("fail creating new article")
+	}
+
+	return ArticleResponse.ToArticle(newArticle), nil
 }
